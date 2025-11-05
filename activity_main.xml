@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <EditText
+        android:id="@+id/urlInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Paste or share a link"
+        android:inputType="textUri"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/summarizeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Summarize"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#2563EB"
+        android:textColor="#FFF" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:id="@+id/summaryOutput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#111"
+            android:textSize="16sp" />
+    </ScrollView>
+</LinearLayout>
