@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Reader</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+    textarea, input, button { width: 100%; margin-top: 10px; padding: 10px; }
+    button { background: #2563eb; color: white; border: none; border-radius: 5px; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>AI Reader</h2>
+  <input id="url" type="text" placeholder="Paste link here..." />
+  <button onclick="summarize()">Summarize</button>
+  <div class="output" id="result"></div>
+
+  <script>
+    async function summarize() {
+      const url = document.getElementById("url").value;
+      const apiKey = "AIzaSyAs75fR_cJuwaRl0eDr2ed_4ZLUzDBkEbM";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+      document.getElementById("result").innerText = "Summarizing...";
+      const body = {
+        contents: [{ parts: [{ text: `Summarize the content found at: ${url}` }] }],
+        systemInstruction: { parts: [{ text: "Provide a short, factual summary." }] }
+      };
+
+      try {
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No summary found.";
+        document.getElementById("result").innerText = text;
+      } catch (err) {
+        document.getElementById("result").innerText = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
